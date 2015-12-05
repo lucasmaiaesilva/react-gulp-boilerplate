@@ -7,7 +7,7 @@ var gulp 		= require('gulp'), // responsavel pelo processo de build
 
 gulp.task('react', function() {
   var bundler = watchify(browserify({
-	entries: ['./src/jsx/app.jsx'], 
+	entries: ['./app/src/jsx/app.jsx'], 
 	transform: [reactify],
 	extensions: ['.jsx'],
 	debug: true,
@@ -22,8 +22,13 @@ gulp.task('react', function() {
 	  .bundle()
 	  .on('error', gutil.log.bind(gutil, 'Browserify Error'))
 	  .pipe(source('main.js'))
-	  .pipe(gulp.dest('./build'));
+	  .pipe(gulp.dest('./build/js'));
   };
   build();
   bundler.on('update', build);
+});
+
+gulp.task('html', function () {
+  gulp.src('app/**/*.html')
+	.pipe(gulp.dest('build/'))
 });
