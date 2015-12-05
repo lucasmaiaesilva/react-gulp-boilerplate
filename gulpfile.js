@@ -31,8 +31,7 @@ gulp.task('react', function() {
 
 gulp.task('browser-sync', function () {
    var files = [
-      'app/**/*.html',
-      'app/jsx/**/*.jsx'
+      'app/**/*.html'
    ];
 
    browserSync.init(files, {
@@ -49,9 +48,8 @@ gulp.task('html', function () {
 
 gulp.task('watch', function () {
   gulp.watch(['app/**/*.html'], ['html']);
-  gulp.watch(['app/jsx/**/*.jsx'], ['react']);
-
+  //gulp.watch(['app/src/jsx/**/*.jsx'], ['react']);
 });
 
 
-gulp.task('default', ['watch', 'html', 'react', 'browser-sync']);
+gulp.task('default', ['html', 'react', 'browser-sync']);
