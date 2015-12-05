@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/lucasmaiaesilva/react-gulp-boilerplate/issues"
   },
-  "homepage": "https://github.com/lucasmaiaesilva/react-gulp-boilerplate"
+  "homepage": "https://github.com/lucasmaiaesilva/react-gulp-boilerplate",
+  "devDependencies": {
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.7",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.1"
+  }
 }
