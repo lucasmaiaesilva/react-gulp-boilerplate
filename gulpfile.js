@@ -1,4 +1,5 @@
 var gulp 		= require('gulp'), // responsavel pelo processo de build
+	browserSync = require('browser-sync'),
 	gutil		= require('gulp-util'), // mostrar mensagens de log no console sobre o processo de build
 	source		= require('vinyl-source-stream'), // gerenciar o source stream
 	browserify	= require('browserify'), // responsável por definir qual parte do código pertence a qual parte via require
@@ -28,7 +29,29 @@ gulp.task('react', function() {
   bundler.on('update', build);
 });
 
+gulp.task('browser-sync', function () {
+   var files = [
+      'app/**/*.html',
+      'app/jsx/**/*.jsx'
+   ];
+
+   browserSync.init(files, {
+      server: {
+         baseDir: 'build/'
+      }
+   });
+});
+
 gulp.task('html', function () {
   gulp.src('app/**/*.html')
 	.pipe(gulp.dest('build/'))
 });
+
+gulp.task('watch', function () {
+  gulp.watch(['app/**/*.html'], ['html']);
+  gulp.watch(['app/jsx/**/*.jsx'], ['react']);
+
+});
+
+
+gulp.task('default', ['watch', 'html', 'react', 'browser-sync']);
