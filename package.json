@@ -1,0 +1,19 @@
+{
+  "name": "react-gulp-boilerplate",
+  "version": "1.0.0",
+  "description": "A boilerplate created to be a simple start to use react with the facilities of gulp",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucasmaiaesilva/react-gulp-boilerplate.git"
+  },
+  "author": "Lucas Maia e Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasmaiaesilva/react-gulp-boilerplate/issues"
+  },
+  "homepage": "https://github.com/lucasmaiaesilva/react-gulp-boilerplate"
+}
