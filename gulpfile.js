@@ -8,14 +8,23 @@ var gulp 		= require('gulp'), // responsavel pelo processo de build
 	notifier	= require('node-notifier');
 
 gulp.task('browser-sync', function () {
-    browserSync({
-        server: {
-            baseDir: "build"
-        }    
-    })
+   var files = [
+      'app/**/*.html'
+      //'app/src/css/**/*.css',
+      //'app/src/img/**/*',
+      //'app/src/js/**/*.js',
+      //'app/src/jsx/**/*.jsx'
+   ];
+
+   browserSync.init(files, {
+      server: {
+         baseDir: 'build/'
+      }
+   });
 });
 
-gulp.task('watch', function () {
+
+gulp.task('react', function () {
     var bundler = watchify(browserify({
 		entries: ['./app/src/jsx/app.jsx'], 
 		transform: [reactify],
@@ -39,7 +48,7 @@ gulp.task('watch', function () {
                 gutil.log(err);
                 notifier.notify({ title: 'Browserify Error', message: 'Something went wrong :/' });
             })
-        	.pipe(source('main.js'))
+        	.pipe(source('components.js'))
         	.pipe(gulp.dest('./build/js'))
         	.pipe(browserSync.reload({ stream: true }));
     }
@@ -47,4 +56,18 @@ gulp.task('watch', function () {
     return rebundle();
 });
 
-gulp.task('default', ['watch', 'browser-sync']);
+gulp.task('html', function () {
+  gulp.src('app/**/*.html')
+	.pipe(gulp.dest('build/'))
+});
+
+gulp.task('watch', function () {
+  gulp.watch(['app/**/*.html'], ['html']);
+  //gulp.watch('app/src/js/*.js', ['scripts']);
+  //gulp.watch('app/src/jsx/*.jsx', ['jsx']);
+  //gulp.watch('app/src/css/*.css', ['css']);
+  //gulp.watch('app/src/styl/*.styl', ['stylus']);
+  //gulp.watch('app/src/fonts/**/*', ['fonts']);
+});
+
+gulp.task('default', ['html', 'react', 'watch','browser-sync']);
